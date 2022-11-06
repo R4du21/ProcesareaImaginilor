@@ -7,6 +7,7 @@ package procesareaimaginilor;
 import java.io.File;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.time.Duration;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +22,7 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         showImage(pos);
+        button_convert.setEnabled(false);
     }
     
     int pos = 0;
@@ -40,6 +42,11 @@ public class main extends javax.swing.JFrame {
         var image = icon.getImage().getScaledInstance(jLabel_left.getWidth(), jLabel_left.getHeight(), Image.SCALE_SMOOTH);
         jLabel_left.setIcon(new ImageIcon(image));
     }
+    
+    public int sliderValue()
+    {
+        return slider.getValue();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,9 +59,11 @@ public class main extends javax.swing.JFrame {
         jLabel_left = new javax.swing.JLabel();
         jLabel_right = new javax.swing.JLabel();
         button_inapoi = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
+        slider = new javax.swing.JSlider();
         button_inainte = new javax.swing.JButton();
         button_convert = new javax.swing.JButton();
+        currentSliderVal = new javax.swing.JLabel();
+        setSliderVal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +78,8 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
+        slider.setOrientation(javax.swing.JSlider.VERTICAL);
+        slider.setValue(0);
 
         button_inainte.setText("Inainte");
         button_inainte.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +95,13 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        setSliderVal.setText("SET");
+        setSliderVal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setSliderValActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,9 +111,20 @@ public class main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel_left, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(75, 75, 75)
+                                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(66, 66, 66)
+                                        .addComponent(currentSliderVal)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                                .addComponent(setSliderVal)
+                                .addGap(43, 43, 43)))
                         .addComponent(jLabel_right, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
@@ -115,7 +143,12 @@ public class main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_right, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_left, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(currentSliderVal)
+                        .addGap(18, 18, 18)
+                        .addComponent(setSliderVal)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_inapoi)
@@ -149,7 +182,19 @@ public class main extends javax.swing.JFrame {
 
     private void button_convertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_convertActionPerformed
         // TODO add your handling code here:
+        try {
+            Thread.sleep(500);
+            System.out.println(sliderValue());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }//GEN-LAST:event_button_convertActionPerformed
+
+    private void setSliderValActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setSliderValActionPerformed
+        // TODO add your handling code here:
+        currentSliderVal.setText(String.format("%s", sliderValue()));
+        button_convert.setEnabled(true);
+    }//GEN-LAST:event_setSliderValActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,8 +235,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton button_convert;
     private javax.swing.JButton button_inainte;
     private javax.swing.JButton button_inapoi;
+    private javax.swing.JLabel currentSliderVal;
     private javax.swing.JLabel jLabel_left;
     private javax.swing.JLabel jLabel_right;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JButton setSliderVal;
+    private javax.swing.JSlider slider;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,8 +15,8 @@ public class ProcesareaImaginilor {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        main m = new main();
-        m.setVisible(true);
+        var window = new main();
+        window.setVisible(true);
     }
     
 }
