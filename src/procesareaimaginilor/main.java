@@ -4,6 +4,11 @@
  */
 package procesareaimaginilor;
 
+import java.io.File;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Raducu
@@ -15,8 +20,26 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+        showImage(pos);
     }
-
+    
+    int pos = 0;
+    
+    public String[] getImages()
+    {
+        var file = new File(getClass().getResource("/procesareaimaginilor/images").getFile());
+        var imagesList = file.list();
+        return imagesList;
+    }
+    
+    public void showImage (int index)
+    {
+        var imagesList = getImages();
+        var imageName = imagesList[index];
+        var icon = new ImageIcon(getClass().getResource("/procesareaimaginilor/images/" + imageName));
+        var image = icon.getImage().getScaledInstance(jLabel_left.getWidth(), jLabel_left.getHeight(), Image.SCALE_SMOOTH);
+        jLabel_left.setIcon(new ImageIcon(image));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,24 +49,39 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        words = new javax.swing.JTextField();
+        jLabel_left = new javax.swing.JLabel();
+        jLabel_right = new javax.swing.JLabel();
+        button_inapoi = new javax.swing.JButton();
+        jSlider1 = new javax.swing.JSlider();
+        button_inainte = new javax.swing.JButton();
+        button_convert = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("type what to print");
+        jLabel_left.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("print");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel_right.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        button_inapoi.setText("Inapoi");
+        button_inapoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                button_inapoiActionPerformed(evt);
             }
         });
 
-        words.addActionListener(new java.awt.event.ActionListener() {
+        jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
+
+        button_inainte.setText("Inainte");
+        button_inainte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wordsActionPerformed(evt);
+                button_inainteActionPerformed(evt);
+            }
+        });
+
+        button_convert.setText("CONVERT");
+        button_convert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_convertActionPerformed(evt);
             }
         });
 
@@ -51,41 +89,67 @@ public class main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(226, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(268, 268, 268))
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(words, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel_left, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addComponent(jLabel_right, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(button_inapoi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(button_inainte, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128)
+                        .addComponent(button_convert)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_right, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_left, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(words))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(204, 204, 204))
+                    .addComponent(button_inapoi)
+                    .addComponent(button_inainte)
+                    .addComponent(button_convert))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void button_inapoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_inapoiActionPerformed
         // TODO add your handling code here:
-        String text = words.getText();
-        System.out.println(text);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        pos = pos - 1;
+        if(pos < 0)
+        {
+            pos = 0;
+        }
+        showImage(pos);
+    }//GEN-LAST:event_button_inapoiActionPerformed
 
-    private void wordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wordsActionPerformed
+    private void button_inainteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_inainteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_wordsActionPerformed
+        pos = pos + 1;
+        if(pos >= getImages().length)
+        {
+            pos = getImages().length - 1;
+        }
+        showImage(pos);
+    }//GEN-LAST:event_button_inainteActionPerformed
+
+    private void button_convertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_convertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_convertActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,8 +187,11 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField words;
+    private javax.swing.JButton button_convert;
+    private javax.swing.JButton button_inainte;
+    private javax.swing.JButton button_inapoi;
+    private javax.swing.JLabel jLabel_left;
+    private javax.swing.JLabel jLabel_right;
+    private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 }
